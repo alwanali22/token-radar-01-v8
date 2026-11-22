@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header>
+<h1>Token Radar</h1>
+<p id="summary">Implied value is TVL times a size-fitted multiple (with an infra intercept) times growth times maturity times launch odds, with no pre-token haircut. The multiple is fitted on this snapshot's own 128 live tokens. Launch odds come from a 12-feature logistic model fitted on all 758 protocols. Snapshot frozen 2026-11-14.</p>
+</header>
+<div id="stats"></div>
+<div id="kpis"></div>
+<div id="badges"></div>
+<section id="evidence" aria-label="Evidence on the first screen">
+<div class="ev-col">
+<h2>Ablation — what survived testing</h2>
+<div id="termsSurvived"></div>
+<table id="ablationValue"><thead><tr><th>Value term</th><th>LOO</th><th>WF 2024</th><th>Kept</th></tr></thead><tbody></tbody></table>
+<table id="ablationOdds"><thead><tr><th>Odds term dropped</th><th>CV Brier</th><th>Kept</th></tr></thead><tbody></tbody></table>
+</div>
+<div class="ev-col">
+<h2>Range honesty</h2>
+<div id="rangeHonesty"></div>
+<h2>How to read this board</h2>
+<p class="note">Rank 1 is the largest implied value, not the best farm. Polymarket is rank 1 but only MARGINAL: its TVL is too large for a $2,000 slice. FARM means net at least $25 and at least $10/hour at that slice.</p>
+</div>
+</section>
+<div id="controls">
+<input id="q" type="search" placeholder="Search name or slug" aria-label="Search name or slug">
+<select id="cat" aria-label="Category"></select>
+<select id="chain" aria-label="Chain"></select>
+<label><input id="wlOnly" type="checkbox"> Watchlist only</label>
+<select id="verdict" aria-label="Verdict"><option value="">All verdicts</option><option>FARM</option><option>MARGINAL</option><option>THIN</option><option>SKIP</option></select>
+<select id="sort" aria-label="Sort"><option value="implied">Sort: implied value</option><option value="net">Sort: farm net</option><option value="tvl">Sort: TVL</option><option value="age">Sort: age</option></select>
+</div>
+<div id="tabs"><button id="tabBoard" class="tab on">Board</button><button id="tabLive" class="tab">Live tokens (24)</button></div>
+<div id="boardWrap"><table id="board"><thead><tr><th>#</th><th>Protocol</th><th>Category</th><th>TVL</th><th>Implied value</th><th>Odds</th><th>Range</th><th>Farm net</th><th>Verdict</th></tr></thead><tbody id="boardBody"></tbody></table></div>
+<div id="liveWrap" hidden><table id="live"><thead><tr><th>#</th><th>Token</th><th>Category</th><th>TVL</th><th>Market cap</th></tr></thead><tbody id="liveBody"></tbody></table></div>
+<section id="ledger"><h2>Ledger — all 758 protocols accounted for</h2><div id="ledgerBody"></div></section>
+<section id="farmNext"><h2>Farm next — best net first</h2><div id="farmNextBody"></div></section>
+<section id="scatter"><h2>Live tokens: market cap vs TVL</h2><div id="scatterBody"></div></section>
+<section id="research"><h2>Research note</h2><div id="researchBody"></div></section>
+<section id="modelPanel"><h2>Model panel</h2><div id="modelBody"></div></section>
+<dialog id="dialog"><button id="dialogClose">Close</button><div id="dialogBody"></div></dialog>
+<script src="../data.js"></script>
+<script src="model.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
